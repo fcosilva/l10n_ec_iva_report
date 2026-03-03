@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <menuitem id="menu_ec_iva_104"
+              name="Declaración IVA 104"
+              parent="l10n_ec_ats.menu_ec_sri_ats_root"
+              action="l10n_ec_iva_report.action_ec_iva_report_run"
+              sequence="20"/>
+</odoo>

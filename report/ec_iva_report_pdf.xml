@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <!-- ══ ACCIÓN DEL REPORTE PDF ══
+         En Community se usa ir.actions.report con report_type="qweb-pdf"
+         El modelo es ec.iva.report.run (registro persistente) -->
+    <record id="action_ec_iva_104_pdf" model="ir.actions.report">
+        <field name="name">Formulario 104 - Declaración de IVA</field>
+        <field name="model">ec.iva.report.run</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">l10n_ec_iva_report.ec_iva_104_pdf_template</field>
+        <field name="report_file">l10n_ec_iva_report.ec_iva_104_pdf_template</field>
+        <field name="paperformat_id" ref="base.paperformat_euro"/>
+    </record>
+
+    <!-- ══ PLANTILLA QWEB DEL PDF ══ -->
+    <template id="ec_iva_104_pdf_template">
+        <t t-call="web.html_container">
+            <t t-call="web.external_layout">
+                <!--
+                    ACCESO A LOS DATOS:
+                    En Community, el contexto se pasa via with_context(resultado_104=...).
+                    El template accede a los datos via el objeto 'doc' (el wizard)
+                    y via request.env.context.
+
+                    Alternativa más simple para Community: pasamos los datos
+                    calculados como campos en el wizard (campos computados en el
+                    TransientModel) y los accedemos con t-field/t-esc normalmente.
+
+                    Aquí usamos el enfoque de AbstractModel report clásico de Community:
+                    el AbstractModel 'report.l10n_ec_iva_report.ec_iva_104_pdf_template'
+                    provee el método _get_report_values() que prepara los datos.
+                -->
+                <t t-foreach="docs" t-as="doc">
+                    <t t-set="datos_104" t-value="resultados_por_doc.get(doc.id, {})"/>
+                    <div class="page">
+
+                        <!-- ══ ENCABEZADO ══ -->
+                        <div style="text-align:center; margin-bottom:14px; border-bottom:3px solid #1F4E79; padding-bottom:8px;">
+                            <h2 style="color:#1F4E79; margin:0; font-size:16px;">SERVICIO DE RENTAS INTERNAS</h2>
+                            <h3 style="color:#2E75B6; margin:4px 0; font-size:13px;">DECLARACIÓN DEL IMPUESTO AL VALOR AGREGADO</h3>
+                            <h4 style="margin:2px 0; font-size:12px; font-weight:bold;">FORMULARIO 104</h4>
+                        </div>
+
+                        <!-- ══ DATOS EMPRESA ══ -->
+                        <table style="width:100%; border-collapse:collapse; margin-bottom:10px; font-size:9px;">
+                            <tr>
+                                <td style="width:12%; background:#D6E4F0; padding:3px 6px; font-weight:bold; border:1px solid #999;">RUC:</td>
+                                <td style="width:38%; padding:3px 6px; border:1px solid #999;"><t t-esc="datos_104.get('meta', {}).get('ruc', '')"/></td>
+                                <td style="width:12%; background:#D6E4F0; padding:3px 6px; font-weight:bold; border:1px solid #999;">Período:</td>
+                                <td style="width:38%; padding:3px 6px; border:1px solid #999;"><t t-esc="datos_104.get('meta', {}).get('period_label', '')"/></td>
+                            </tr>
+                            <tr>
+                                <td style="background:#D6E4F0; padding:3px 6px; font-weight:bold; border:1px solid #999;">Razón Social:</td>
+                                <td colspan="3" style="padding:3px 6px; border:1px solid #999;"><t t-esc="datos_104.get('meta', {}).get('razon_social', '')"/></td>
+                            </tr>
+                        </table>
+
+                        <!-- ══ MACRO: fila del formulario ══ -->
+                        <t t-set="cas_style" t-value="'text-align:center; background:#D6E4F0; font-weight:bold; width:55px; border:1px solid #CCCCCC; padding:2px 3px; font-size:8px;'"/>
+                        <t t-set="lbl_style" t-value="'padding:2px 5px; border:1px solid #CCCCCC; font-size:8px;'"/>
+                        <t t-set="val_style" t-value="'text-align:right; border:1px solid #CCCCCC; padding:2px 5px; width:110px; font-size:8px;'"/>
+                        <t t-set="tot_style" t-value="'text-align:right; border:1px solid #CCCCCC; padding:3px 5px; width:110px; font-size:8px; background:#FFF2CC; font-weight:bold;'"/>
+                        <t t-set="sec_style" t-value="'padding:4px 6px; background:#2E75B6; color:white; font-weight:bold; border:1px solid #1F4E79; font-size:9px;'"/>
+
+                        <t t-set="secciones" t-value="datos_104.get('secciones', {})"/>
+                        <t t-set="secciones_dyn" t-value="secciones.get('dynamic', [])"/>
+                        <t t-foreach="secciones_dyn" t-as="seccion">
+                            <table style="width:100%; border-collapse:collapse; margin-bottom:6px;">
+                                <tr><th colspan="4" t-att-style="sec_style"><t t-esc="seccion.get('title')"/></th></tr>
+                                <tr>
+                                    <th t-att-style="sec_style">Casillero</th>
+                                    <th t-att-style="sec_style">Descripción</th>
+                                    <th t-att-style="sec_style">Cuentas relacionadas</th>
+                                    <th t-att-style="sec_style">Valor</th>
+                                </tr>
+                                <t t-foreach="seccion.get('lines', [])" t-as="linea">
+                                    <tr>
+                                        <td t-att-style="cas_style"><t t-esc="linea.get('code', '')"/></td>
+                                        <td t-att-style="lbl_style"><t t-esc="linea.get('label', '')"/></td>
+                                        <td t-att-style="lbl_style"><t t-esc="linea.get('accounts_summary', '')"/></td>
+                                        <td t-att-style="tot_style if ('total' in (linea.get('label', '') or '').lower() or 'subtotal' in (linea.get('label', '') or '').lower()) else val_style">
+                                            <t t-esc="'{:,.2f}'.format(linea.get('value', 0.0))"/>
+                                        </td>
+                                    </tr>
+                                </t>
+                            </table>
+                        </t>
+
+                        <t t-set="detail_rows" t-value="secciones.get('details', [])"/>
+                        <table style="width:100%; border-collapse:collapse; margin-top:8px;">
+                            <tr><th colspan="6" t-att-style="sec_style">Detalle por cuenta contable</th></tr>
+                            <tr>
+                                <th t-att-style="sec_style">Casillero</th>
+                                <th t-att-style="sec_style">Descripción</th>
+                                <th t-att-style="sec_style">Cuenta</th>
+                                <th t-att-style="sec_style">Nombre cuenta</th>
+                                <th t-att-style="sec_style"># Líneas</th>
+                                <th t-att-style="sec_style">Monto ref.</th>
+                            </tr>
+                            <t t-foreach="detail_rows" t-as="linea">
+                                <t t-foreach="linea.get('accounts', [])" t-as="acc">
+                                    <tr>
+                                        <td t-att-style="cas_style"><t t-esc="linea.get('code', '')"/></td>
+                                        <td t-att-style="lbl_style"><t t-esc="linea.get('label', '')"/></td>
+                                        <td t-att-style="lbl_style"><t t-esc="acc.get('account_code', '')"/></td>
+                                        <td t-att-style="lbl_style"><t t-esc="acc.get('account_name', '')"/></td>
+                                        <td t-att-style="val_style"><t t-esc="acc.get('line_count', 0)"/></td>
+                                        <td t-att-style="val_style"><t t-esc="'{:,.2f}'.format(acc.get('amount_ref', 0.0))"/></td>
+                                    </tr>
+                                </t>
+                            </t>
+                            <t t-if="not detail_rows">
+                                <tr>
+                                    <td colspan="6" t-att-style="lbl_style">Sin detalle de cuentas.</td>
+                                </tr>
+                            </t>
+                        </table>
+
+                        <!-- ══ ZONA DE FIRMAS ══ -->
+                        <table style="width:100%; border-collapse:collapse; margin-top:18px; font-size:8px;">
+                            <tr>
+                                <td style="width:45%; text-align:center; border-top:1px solid #000; padding:6px;">
+                                    Firma Representante Legal / Contribuyente<br/>
+                                    <span style="color:#555;">Nombre: ___________________________</span><br/>
+                                    <span style="color:#555;">CI/RUC: ___________________________</span>
+                                </td>
+                                <td style="width:10%;"/>
+                                <td style="width:45%; text-align:center; border-top:1px solid #000; padding:6px;">
+                                    Firma Contador<br/>
+                                    <span style="color:#555;">Nombre: ___________________________</span><br/>
+                                    <span style="color:#555;">RUC/CI: ___________________________</span>
+                                </td>
+                            </tr>
+                        </table>
+
+                        <p style="font-size:6.5px; color:#888; text-align:center; margin-top:8px;">
+                            Formulario 104 — IVA 15% (vigente desde dic. 2024) — Generado desde Odoo 17 Community
+                        </p>
+
+                    </div>
+                </t>
+            </t>
+        </t>
+    </template>
+
+    <!-- ══ ABSTRACT MODEL REPORT (requerido en Community para pasar datos al PDF) ══
+         Este record define el AbstractModel que sirve de puente entre el wizard
+         y la plantilla QWeb. Se crea en Python (report/ec_iva_report_abstract.py).
+         Ver ese archivo para la implementación del método _get_report_values(). -->
+
+</odoo>

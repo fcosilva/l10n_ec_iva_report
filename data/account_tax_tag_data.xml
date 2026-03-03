@@ -1,0 +1,371 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+    account_tax_tag_data.xml
+    ========================
+    Tags de impuestos para el Formulario 104 del SRI Ecuador.
+    noupdate="1" evita sobreescribir los tags que ya existan en l10n_ec oficial.
+
+    CÓMO FUNCIONA EN COMMUNITY:
+    - En Community no existe account_reports ni account.report.line.
+    - Los tax tags (account.account.tag) son el mecanismo nativo de Odoo
+      para clasificar líneas de impuesto — disponible en Community.
+    - El motor de cálculo (ec_iva_engine.py) consulta directamente
+      account.move.line filtrando por tag_ids para obtener cada casillero.
+-->
+<odoo noupdate="1">
+
+    <!-- ══ SECCIÓN I — VENTAS ══ -->
+    <record id="tag_ec_411" model="account.account.tag">
+        <field name="name">+EC_411</field>
+        <field name="applicability">taxes</field>
+        <field name="country_id" ref="base.ec"/>
+    </record>
+    <record id="tag_ec_411_n" model="account.account.tag">
+        <field name="name">-EC_411</field>
+        <field name="applicability">taxes</field>
+        <field name="country_id" ref="base.ec"/>
+    </record>
+
+    <record id="tag_ec_412" model="account.account.tag">
+        <field name="name">+EC_412</field>
+        <field name="applicability">taxes</field>
+        <field name="country_id" ref="base.ec"/>
+    </record>
+    <record id="tag_ec_412_n" model="account.account.tag">
+        <field name="name">-EC_412</field>
+        <field name="applicability">taxes</field>
+        <field name="country_id" ref="base.ec"/>
+    </record>
+
+    <record id="tag_ec_413" model="account.account.tag">
+        <field name="name">+EC_413</field>
+        <field name="applicability">taxes</field>
+        <field name="country_id" ref="base.ec"/>
+    </record>
+    <record id="tag_ec_413_n" model="account.account.tag">
+        <field name="name">-EC_413</field>
+        <field name="applicability">taxes</field>
+        <field name="country_id" ref="base.ec"/>
+    </record>
+
+    <record id="tag_ec_414" model="account.account.tag">
+        <field name="name">+EC_414</field>
+        <field name="applicability">taxes</field>
+        <field name="country_id" ref="base.ec"/>
+    </record>
+    <record id="tag_ec_414_n" model="account.account.tag">
+        <field name="name">-EC_414</field>
+        <field name="applicability">taxes</field>
+        <field name="country_id" ref="base.ec"/>
+    </record>
+
+    <record id="tag_ec_415" model="account.account.tag">
+        <field name="name">+EC_415</field>
+        <field name="applicability">taxes</field>
+        <field name="country_id" ref="base.ec"/>
+    </record>
+    <record id="tag_ec_415_n" model="account.account.tag">
+        <field name="name">-EC_415</field>
+        <field name="applicability">taxes</field>
+        <field name="country_id" ref="base.ec"/>
+    </record>
+
+    <record id="tag_ec_416" model="account.account.tag">
+        <field name="name">+EC_416</field>
+        <field name="applicability">taxes</field>
+        <field name="country_id" ref="base.ec"/>
+    </record>
+    <record id="tag_ec_416_n" model="account.account.tag">
+        <field name="name">-EC_416</field>
+        <field name="applicability">taxes</field>
+        <field name="country_id" ref="base.ec"/>
+    </record>
+
+    <record id="tag_ec_407" model="account.account.tag">
+        <field name="name">+EC_407</field>
+        <field name="applicability">taxes</field>
+        <field name="country_id" ref="base.ec"/>
+    </record>
+    <record id="tag_ec_407_n" model="account.account.tag">
+        <field name="name">-EC_407</field>
+        <field name="applicability">taxes</field>
+        <field name="country_id" ref="base.ec"/>
+    </record>
+
+    <record id="tag_ec_408" model="account.account.tag">
+        <field name="name">+EC_408</field>
+        <field name="applicability">taxes</field>
+        <field name="country_id" ref="base.ec"/>
+    </record>
+    <record id="tag_ec_408_n" model="account.account.tag">
+        <field name="name">-EC_408</field>
+        <field name="applicability">taxes</field>
+        <field name="country_id" ref="base.ec"/>
+    </record>
+
+    <record id="tag_ec_409" model="account.account.tag">
+        <field name="name">+EC_409</field>
+        <field name="applicability">taxes</field>
+        <field name="country_id" ref="base.ec"/>
+    </record>
+    <record id="tag_ec_409_n" model="account.account.tag">
+        <field name="name">-EC_409</field>
+        <field name="applicability">taxes</field>
+        <field name="country_id" ref="base.ec"/>
+    </record>
+
+    <record id="tag_ec_410" model="account.account.tag">
+        <field name="name">+EC_410</field>
+        <field name="applicability">taxes</field>
+        <field name="country_id" ref="base.ec"/>
+    </record>
+    <record id="tag_ec_410_n" model="account.account.tag">
+        <field name="name">-EC_410</field>
+        <field name="applicability">taxes</field>
+        <field name="country_id" ref="base.ec"/>
+    </record>
+
+    <record id="tag_ec_420" model="account.account.tag">
+        <field name="name">+EC_420</field>
+        <field name="applicability">taxes</field>
+        <field name="country_id" ref="base.ec"/>
+    </record>
+    <record id="tag_ec_420_n" model="account.account.tag">
+        <field name="name">-EC_420</field>
+        <field name="applicability">taxes</field>
+        <field name="country_id" ref="base.ec"/>
+    </record>
+
+    <!-- ══ SECCIÓN II — COMPRAS ══ -->
+    <record id="tag_ec_500" model="account.account.tag">
+        <field name="name">+EC_500</field>
+        <field name="applicability">taxes</field>
+        <field name="country_id" ref="base.ec"/>
+    </record>
+    <record id="tag_ec_500_n" model="account.account.tag">
+        <field name="name">-EC_500</field>
+        <field name="applicability">taxes</field>
+        <field name="country_id" ref="base.ec"/>
+    </record>
+
+    <record id="tag_ec_501" model="account.account.tag">
+        <field name="name">+EC_501</field>
+        <field name="applicability">taxes</field>
+        <field name="country_id" ref="base.ec"/>
+    </record>
+    <record id="tag_ec_501_n" model="account.account.tag">
+        <field name="name">-EC_501</field>
+        <field name="applicability">taxes</field>
+        <field name="country_id" ref="base.ec"/>
+    </record>
+
+    <record id="tag_ec_502" model="account.account.tag">
+        <field name="name">+EC_502</field>
+        <field name="applicability">taxes</field>
+        <field name="country_id" ref="base.ec"/>
+    </record>
+    <record id="tag_ec_502_n" model="account.account.tag">
+        <field name="name">-EC_502</field>
+        <field name="applicability">taxes</field>
+        <field name="country_id" ref="base.ec"/>
+    </record>
+
+    <record id="tag_ec_503" model="account.account.tag">
+        <field name="name">+EC_503</field>
+        <field name="applicability">taxes</field>
+        <field name="country_id" ref="base.ec"/>
+    </record>
+    <record id="tag_ec_503_n" model="account.account.tag">
+        <field name="name">-EC_503</field>
+        <field name="applicability">taxes</field>
+        <field name="country_id" ref="base.ec"/>
+    </record>
+
+    <record id="tag_ec_504" model="account.account.tag">
+        <field name="name">+EC_504</field>
+        <field name="applicability">taxes</field>
+        <field name="country_id" ref="base.ec"/>
+    </record>
+    <record id="tag_ec_504_n" model="account.account.tag">
+        <field name="name">-EC_504</field>
+        <field name="applicability">taxes</field>
+        <field name="country_id" ref="base.ec"/>
+    </record>
+
+    <record id="tag_ec_505" model="account.account.tag">
+        <field name="name">+EC_505</field>
+        <field name="applicability">taxes</field>
+        <field name="country_id" ref="base.ec"/>
+    </record>
+    <record id="tag_ec_505_n" model="account.account.tag">
+        <field name="name">-EC_505</field>
+        <field name="applicability">taxes</field>
+        <field name="country_id" ref="base.ec"/>
+    </record>
+
+    <record id="tag_ec_506" model="account.account.tag">
+        <field name="name">+EC_506</field>
+        <field name="applicability">taxes</field>
+        <field name="country_id" ref="base.ec"/>
+    </record>
+    <record id="tag_ec_506_n" model="account.account.tag">
+        <field name="name">-EC_506</field>
+        <field name="applicability">taxes</field>
+        <field name="country_id" ref="base.ec"/>
+    </record>
+
+    <record id="tag_ec_507" model="account.account.tag">
+        <field name="name">+EC_507</field>
+        <field name="applicability">taxes</field>
+        <field name="country_id" ref="base.ec"/>
+    </record>
+    <record id="tag_ec_507_n" model="account.account.tag">
+        <field name="name">-EC_507</field>
+        <field name="applicability">taxes</field>
+        <field name="country_id" ref="base.ec"/>
+    </record>
+
+    <record id="tag_ec_508" model="account.account.tag">
+        <field name="name">+EC_508</field>
+        <field name="applicability">taxes</field>
+        <field name="country_id" ref="base.ec"/>
+    </record>
+    <record id="tag_ec_508_n" model="account.account.tag">
+        <field name="name">-EC_508</field>
+        <field name="applicability">taxes</field>
+        <field name="country_id" ref="base.ec"/>
+    </record>
+
+    <record id="tag_ec_509" model="account.account.tag">
+        <field name="name">+EC_509</field>
+        <field name="applicability">taxes</field>
+        <field name="country_id" ref="base.ec"/>
+    </record>
+    <record id="tag_ec_509_n" model="account.account.tag">
+        <field name="name">-EC_509</field>
+        <field name="applicability">taxes</field>
+        <field name="country_id" ref="base.ec"/>
+    </record>
+
+    <record id="tag_ec_510" model="account.account.tag">
+        <field name="name">+EC_510</field>
+        <field name="applicability">taxes</field>
+        <field name="country_id" ref="base.ec"/>
+    </record>
+    <record id="tag_ec_510_n" model="account.account.tag">
+        <field name="name">-EC_510</field>
+        <field name="applicability">taxes</field>
+        <field name="country_id" ref="base.ec"/>
+    </record>
+
+    <record id="tag_ec_511" model="account.account.tag">
+        <field name="name">+EC_511</field>
+        <field name="applicability">taxes</field>
+        <field name="country_id" ref="base.ec"/>
+    </record>
+    <record id="tag_ec_511_n" model="account.account.tag">
+        <field name="name">-EC_511</field>
+        <field name="applicability">taxes</field>
+        <field name="country_id" ref="base.ec"/>
+    </record>
+
+    <record id="tag_ec_512" model="account.account.tag">
+        <field name="name">+EC_512</field>
+        <field name="applicability">taxes</field>
+        <field name="country_id" ref="base.ec"/>
+    </record>
+    <record id="tag_ec_512_n" model="account.account.tag">
+        <field name="name">-EC_512</field>
+        <field name="applicability">taxes</field>
+        <field name="country_id" ref="base.ec"/>
+    </record>
+
+    <record id="tag_ec_513" model="account.account.tag">
+        <field name="name">+EC_513</field>
+        <field name="applicability">taxes</field>
+        <field name="country_id" ref="base.ec"/>
+    </record>
+    <record id="tag_ec_513_n" model="account.account.tag">
+        <field name="name">-EC_513</field>
+        <field name="applicability">taxes</field>
+        <field name="country_id" ref="base.ec"/>
+    </record>
+
+    <record id="tag_ec_514" model="account.account.tag">
+        <field name="name">+EC_514</field>
+        <field name="applicability">taxes</field>
+        <field name="country_id" ref="base.ec"/>
+    </record>
+    <record id="tag_ec_514_n" model="account.account.tag">
+        <field name="name">-EC_514</field>
+        <field name="applicability">taxes</field>
+        <field name="country_id" ref="base.ec"/>
+    </record>
+
+    <record id="tag_ec_515" model="account.account.tag">
+        <field name="name">+EC_515</field>
+        <field name="applicability">taxes</field>
+        <field name="country_id" ref="base.ec"/>
+    </record>
+    <record id="tag_ec_515_n" model="account.account.tag">
+        <field name="name">-EC_515</field>
+        <field name="applicability">taxes</field>
+        <field name="country_id" ref="base.ec"/>
+    </record>
+
+    <record id="tag_ec_516" model="account.account.tag">
+        <field name="name">+EC_516</field>
+        <field name="applicability">taxes</field>
+        <field name="country_id" ref="base.ec"/>
+    </record>
+    <record id="tag_ec_516_n" model="account.account.tag">
+        <field name="name">-EC_516</field>
+        <field name="applicability">taxes</field>
+        <field name="country_id" ref="base.ec"/>
+    </record>
+
+    <record id="tag_ec_517" model="account.account.tag">
+        <field name="name">+EC_517</field>
+        <field name="applicability">taxes</field>
+        <field name="country_id" ref="base.ec"/>
+    </record>
+    <record id="tag_ec_517_n" model="account.account.tag">
+        <field name="name">-EC_517</field>
+        <field name="applicability">taxes</field>
+        <field name="country_id" ref="base.ec"/>
+    </record>
+
+    <record id="tag_ec_518" model="account.account.tag">
+        <field name="name">+EC_518</field>
+        <field name="applicability">taxes</field>
+        <field name="country_id" ref="base.ec"/>
+    </record>
+    <record id="tag_ec_518_n" model="account.account.tag">
+        <field name="name">-EC_518</field>
+        <field name="applicability">taxes</field>
+        <field name="country_id" ref="base.ec"/>
+    </record>
+
+    <!-- Retenciones IVA recibidas (ventas) -->
+    <record id="tag_ec_721" model="account.account.tag">
+        <field name="name">+EC_721</field>
+        <field name="applicability">taxes</field>
+        <field name="country_id" ref="base.ec"/>
+    </record>
+    <record id="tag_ec_723" model="account.account.tag">
+        <field name="name">+EC_723</field>
+        <field name="applicability">taxes</field>
+        <field name="country_id" ref="base.ec"/>
+    </record>
+    <record id="tag_ec_725" model="account.account.tag">
+        <field name="name">+EC_725</field>
+        <field name="applicability">taxes</field>
+        <field name="country_id" ref="base.ec"/>
+    </record>
+    <record id="tag_ec_727" model="account.account.tag">
+        <field name="name">+EC_727</field>
+        <field name="applicability">taxes</field>
+        <field name="country_id" ref="base.ec"/>
+    </record>
+
+</odoo>

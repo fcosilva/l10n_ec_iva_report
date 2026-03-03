@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <!-- ══ VISTA DEL WIZARD ══ -->
+    <record id="view_ec_iva_wizard_form" model="ir.ui.view">
+        <field name="name">ec.iva.wizard.form</field>
+        <field name="model">ec.iva.wizard</field>
+        <field name="arch" type="xml">
+            <form string="Declaración IVA 104 - Parámetros">
+                <group string="Período de la declaración">
+                    <group>
+                        <field name="company_id"/>
+                        <field name="tipo_periodo" widget="radio"/>
+                        <field name="anio"/>
+                        <field name="mes"
+                               invisible="tipo_periodo != 'mensual'"
+                               required="tipo_periodo == 'mensual'"/>
+                    </group>
+                    <group>
+                        <field name="fecha_desde" readonly="1"/>
+                        <field name="fecha_hasta" readonly="1"/>
+                        <field name="credito_mes_anterior"
+                               help="Valor del casillero 605 de la declaración anterior. Dejar en 0 si no hay crédito."/>
+                    </group>
+                </group>
+                <footer>
+                    <button name="action_generar" string="Generar vista"
+                            type="object" class="btn-primary"/>
+                    <button string="Cancelar" class="btn-secondary" special="cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <record id="view_ec_iva_wizard_result_form" model="ir.ui.view">
+        <field name="name">ec.iva.wizard.result.form</field>
+        <field name="model">ec.iva.wizard</field>
+        <field name="arch" type="xml">
+            <form string="Declaración IVA 104 - Resultado">
+                <group invisible="not estado">
+                    <field name="estado" readonly="1" widget="text"/>
+                </group>
+                <group string="Vista previa en pantalla"
+                       invisible="not vista_previa_html">
+                    <field name="vista_previa_html" widget="html" readonly="1"/>
+                </group>
+                <group string="Exportar archivos">
+                    <button name="action_exportar_pdf" string="Ver PDF" type="object" class="btn-primary"/>
+                    <button name="action_exportar_xlsx" string="Generar XLSX" type="object" class="btn-secondary"/>
+                    <button name="action_exportar_xml" string="Generar XML" type="object" class="btn-secondary"/>
+                </group>
+                <group invisible="not archivo_datos">
+                    <field name="archivo_nombre" readonly="1"/>
+                    <field name="archivo_datos" widget="binary"
+                           filename="archivo_nombre" readonly="1"/>
+                </group>
+                <footer>
+                    <button name="action_generar" string="Regenerar vista" type="object" class="btn-secondary"/>
+                    <button string="Cerrar" class="btn-secondary" special="cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <!-- ══ ACCIÓN DEL WIZARD ══ -->
+    <record id="action_ec_iva_wizard" model="ir.actions.act_window">
+        <field name="name">Declaración IVA — Formulario 104</field>
+        <field name="res_model">ec.iva.wizard</field>
+        <field name="view_mode">form</field>
+        <field name="view_id" ref="view_ec_iva_wizard_form"/>
+        <field name="target">new</field>
+    </record>
+
+</odoo>

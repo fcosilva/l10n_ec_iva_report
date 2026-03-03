@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="view_ec_iva_report_run_tree" model="ir.ui.view">
+        <field name="name">ec.iva.report.run.tree</field>
+        <field name="model">ec.iva.report.run</field>
+        <field name="arch" type="xml">
+            <tree string="Declaraciones IVA 104">
+                <field name="name"/>
+                <field name="company_id"/>
+                <field name="tipo_periodo"/>
+                <field name="anio"/>
+                <field name="mes" optional="show"/>
+                <field name="fecha_desde"/>
+                <field name="fecha_hasta"/>
+                <field name="state"/>
+                <field name="generated_at"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="view_ec_iva_report_run_form" model="ir.ui.view">
+        <field name="name">ec.iva.report.run.form</field>
+        <field name="model">ec.iva.report.run</field>
+        <field name="arch" type="xml">
+            <form string="Declaración IVA 104">
+                <header>
+                    <button name="action_generar" string="Generar Vista" type="object" class="btn-primary"/>
+                    <button name="action_exportar_pdf" string="Ver PDF" type="object" invisible="state != 'generated'"/>
+                    <button name="action_exportar_xlsx" string="Generar XLSX" type="object" invisible="state != 'generated'"/>
+                    <button name="action_exportar_xml" string="Generar XML" type="object" invisible="state != 'generated'"/>
+                    <field name="state" widget="statusbar" statusbar_visible="draft,generated"/>
+                </header>
+                <sheet>
+                    <group>
+                        <group string="Parámetros">
+                            <field name="name"/>
+                            <field name="company_id"/>
+                            <field name="tipo_periodo"/>
+                            <field name="anio"/>
+                            <field name="mes" invisible="tipo_periodo != 'mensual'" required="tipo_periodo == 'mensual'"/>
+                            <field name="credito_mes_anterior"/>
+                        </group>
+                        <group string="Control">
+                            <field name="fecha_desde" readonly="1"/>
+                            <field name="fecha_hasta" readonly="1"/>
+                            <field name="generated_at" readonly="1"/>
+                            <field name="estado" readonly="1" widget="text"/>
+                        </group>
+                    </group>
+
+                    <group string="Vista previa" invisible="not vista_previa_html">
+                        <field name="vista_previa_html" widget="html" readonly="1"/>
+                    </group>
+
+                    <group string="Descarga" invisible="not archivo_datos">
+                        <field name="archivo_nombre" readonly="1"/>
+                        <field name="archivo_datos" filename="archivo_nombre" widget="binary" readonly="1"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_ec_iva_report_run" model="ir.actions.act_window">
+        <field name="name">Declaración IVA 104</field>
+        <field name="res_model">ec.iva.report.run</field>
+        <field name="view_mode">tree,form</field>
+        <field name="help" type="html">
+            <p>Crea una ejecución del Formulario 104 y genera su vista previa/exportaciones.</p>
+        </field>
+    </record>
+
+</odoo>

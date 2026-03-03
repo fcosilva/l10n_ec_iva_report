@@ -1,0 +1,6 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_ec_iva_wizard_user,ec.iva.wizard user,model_ec_iva_wizard,account.group_account_user,1,1,1,1
+access_ec_iva_wizard_manager,ec.iva.wizard manager,model_ec_iva_wizard,account.group_account_manager,1,1,1,1
+access_ec_iva_engine,ec.iva.engine,model_ec_iva_engine,account.group_account_user,1,0,0,0
+access_ec_iva_report_run_user,ec.iva.report.run user,model_ec_iva_report_run,account.group_account_user,1,1,1,1
+access_ec_iva_report_run_manager,ec.iva.report.run manager,model_ec_iva_report_run,account.group_account_manager,1,1,1,1
