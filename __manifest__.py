@@ -20,7 +20,7 @@
         - l10n_ec (localización oficial — Community desde v16)
     """,
     'author': 'Tu Empresa',
-    'license': 'LGPL-3',
+    'license': 'AGPL-3',
     'depends': [
         'account',    # Community
         'l10n_ec',    # Localización oficial Ecuador (Community desde v16)
